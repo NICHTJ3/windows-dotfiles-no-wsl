@@ -472,9 +472,13 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)<cr>
 "Coc rename symbol
 nmap <leader>rn <Plug>(coc-rename)
 
+" Better visual block indentation changing
+" FIXME: Backdenting is not working as expected on windows
+vnoremap < <gv
+vnoremap > >gv
 
 " Regen ctags
- map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
 
 nmap <Leader>t :Term<CR>
 "}}}

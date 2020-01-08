@@ -135,7 +135,8 @@ let g:fzf_colors =
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()'}
 
 " Ferret
-let g:FerretExecutable='ag'
+" let g:FerretExecutable='ag' " Apparently cannot be enabled on windows as it
+" breaks the job
 
 " Coc
 set hidden
@@ -345,7 +346,6 @@ function! MyHighlights() abort
   hi Pmenu guibg=#2d2d2d ctermbg=246
 endfunction
 
-
 augroup MyColors
     autocmd!
     autocmd ColorScheme default call MyHighlights()
@@ -354,10 +354,9 @@ colorscheme default
 
 augroup AutoSource
   autocmd!
-  autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
+  " autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup end
-
-
 " }}}
 
 " Mappings {{{
@@ -476,6 +475,8 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Regen ctags
  map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+
+nmap <Leader>t :Term<CR>
 "}}}
 
 " Commands {{{

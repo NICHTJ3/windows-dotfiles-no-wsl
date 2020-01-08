@@ -41,7 +41,7 @@ call plug#end()
 " }}}
 
 " Settings {{{
-" Remap leader to space
+" Remap leader to space is not working
 let mapleader = " "
 let maplocalleader = " "
 
@@ -52,13 +52,20 @@ set ai et sw=2 ts=2 sts=2
 set mouse=a
 set spellfile=~/spell/en.utf-8.add
 noswapfile
-let &colorcolumn=join(range(81,999),",")
 
 " UI
 set background=dark
 set list
 set listchars=tab:>~,nbsp:_,trail:.,extends:>,precedes:<
 set cursorline
+
+" Custom keys as todo
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+
 
 " No wrapping and line numbers
 set nowrap
@@ -85,6 +92,7 @@ function! MyFoldText()
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction
 set foldtext=MyFoldText()
+set foldlevel=2
 
 " Search
 set hlsearch
@@ -138,6 +146,7 @@ let g:tagbar_left=1
 " TagmaTasks
 let g:TagmaTasksMarks = 0
 let g:TagmaTasksTokens = ['FIXME', 'TODO', 'NOTE', 'XXX', 'COMBAK']
+let g:TagmaTasksAutoUpdate = 0
 
 
 " Coc extensions
@@ -200,7 +209,7 @@ endfun
 function! CreateCenteredFloatingWindow()
     let width = float2nr(&columns * 0.6)
     let height = float2nr(&lines * 0.6)
-    let top = ((&lines - height) / 2) - 1
+    let top = ((&lines - height) / 2) - 2
     let left = (&columns - width) / 2
     let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
 
@@ -212,6 +221,7 @@ function! CreateCenteredFloatingWindow()
     call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
     call nvim_open_win(s:buf, v:true, opts)
     set winhl=Normal:Floating
+
     let opts.row += 1
     let opts.height -= 2
     let opts.col += 2
@@ -300,36 +310,45 @@ endfunction
 augroup vimrcAutoView
   autocmd!
   " Autosave & Load Views.
-  autocmd BufWritePost,BufLeave,WinLeave * if MakeViewCheck() | mkview | endif
-  autocmd BufWinEnter * if MakeViewCheck() | silent loadview | endif
+  " autocmd BufWritePost,BufLeave,WinLeave * if MakeViewCheck() | mkview | endif
+  " autocmd BufWinEnter * if MakeViewCheck() | silent loadview | endif
 augroup end
 
 augroup folds
   autocmd!
-  " Autosave & Load Views.
   autocmd FileType cs setlocal foldmethod=indent
   autocmd FileType vim setlocal foldmethod=marker
 augroup end
 
 " TODO: Change this to use filetype
-augroup C#
+augroup Indentation
   autocmd!
-  autocmd BufRead,BufNewFile * set sw=2 ts=2 sts=2 | set et
-  autocmd WinLeave,BufLeave * set sw=2 ts=2 sts=2 | set et
-  autocmd BufRead,BufNewFile *.cs set sw=4 ts=4 sts=4
-  autocmd WinLeave,BufLeave *.cs set sw=2 ts=2 sts=2
-  autocmd BufRead,BufNewFile *.feature set sw=2 ts=2 sts=2 | set et=0
-  autocmd WinLeave,BufLeave *.feature set sw=2 ts=2 sts=2 | set et=0
+  autocmd FileType cs setlocal sw=4 ts=4 sts=4
+  autocmd FileType cucumber setlocal sw=2 ts=2 sts=2 noet
+augroup end
+
+function! TODOComments() abort
+  syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|COMBAK|XXX)/
+        \ containedin=.*Comment,vimCommentTitle
+  hi link MyTodo Todo
+endfunction
+
+augroup TODOHighlighting
+  autocmd!
+  autocmd FileType * call TODOComments()
 augroup end
 
 function! MyHighlights() abort
   hi ColorColumn guibg=#2d2d2d ctermbg=246
   hi Folded guibg=#2d2d2d ctermbg=246
+  " Popup menu with default colorscheme look normal
+  hi Pmenu guibg=#2d2d2d ctermbg=246
 endfunction
+
 
 augroup MyColors
     autocmd!
-    autocmd ColorScheme * call MyHighlights()
+    autocmd ColorScheme default call MyHighlights()
 augroup END
 colorscheme default
 
@@ -337,6 +356,7 @@ augroup AutoSource
   autocmd!
   autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup end
+
 
 " }}}
 

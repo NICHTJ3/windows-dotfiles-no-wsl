@@ -36,6 +36,8 @@ call plug#begin()
   Plug 'vim-airline/vim-airline-themes'
 
   Plug 'majutsushi/tagbar'
+
+  Plug 'jceb/vim-orgmode'
 call plug#end()
 
 " }}}
@@ -258,6 +260,9 @@ autocmd TermOpen * startinsert
 " Turn off line numbers etc
 autocmd TermOpen * setlocal listchars= nonumber norelativenumber
 
+" Close fzf with escape
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+
 
 function! OnTermExit(job_id, code, event) dict
     if a:code == 0
@@ -328,6 +333,7 @@ augroup Indentation
   autocmd FileType cucumber setlocal sw=2 ts=2 sts=2 noet
 augroup end
 
+
 function! TODOComments() abort
   syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|COMBAK|XXX)/
         \ containedin=.*Comment,vimCommentTitle
@@ -350,7 +356,7 @@ augroup MyColors
     autocmd!
     autocmd ColorScheme default call MyHighlights()
 augroup END
-colorscheme default
+colorscheme base16-onedark
 
 augroup AutoSource
   autocmd!
@@ -478,7 +484,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Regen ctags
-map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+ map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
 
 nmap <Leader>t :Term<CR>
 "}}}

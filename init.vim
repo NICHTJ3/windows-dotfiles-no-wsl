@@ -119,8 +119,8 @@ let NERDTreeMinimalMenu=1
 
 " FZF
 let $FZF_DEFAULT_COMMAND = 'dir /s/b'
-let g:fzf_colors =
-            \ { 'fg':      ['fg', 'Normal'],
+let g:fzf_colors = {
+            \'fg':      ['fg', 'Normal'],
             \ 'bg':      ['bg', 'Normal'],
             \ 'hl':      ['fg', 'Comment'],
             \ 'fg+':     ['fg', 'CursorLine'],
@@ -132,7 +132,8 @@ let g:fzf_colors =
             \ 'pointer': ['fg', 'Exception'],
             \ 'marker':  ['fg', 'Keyword'],
             \ 'spinner': ['fg', 'Label'],
-            \ 'header':  ['fg', 'Comment'] }
+            \ 'header':  ['fg', 'Comment']
+            \}
 
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()'}
 
@@ -262,6 +263,8 @@ autocmd TermOpen * setlocal listchars= nonumber norelativenumber
 
 " Close fzf with escape
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+" Open in vertical split as it is more of a pneumonic
+autocmd! FileType fzf tnoremap <buffer> <c-h> <c-x>
 
 
 function! OnTermExit(job_id, code, event) dict
@@ -421,6 +424,8 @@ nnoremap <C-n> :NERDTreeTabsToggle<CR>:doau FocusGained<CR>
 
 " Open FZF with ctrl-p
 nnoremap <C-p> :FZF<cr>
+
+
 
 " Y yanks to end of line like it should
 nnoremap Y y$

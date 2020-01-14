@@ -137,23 +137,35 @@ let g:fzf_colors = {
 
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()'}
 
-" Ferret
-" let g:FerretExecutable='ag' " Apparently cannot be enabled on windows as it
-" breaks the job
+"#########################
+"#         Ferret        #
+"#########################
 
-" Coc
+" Apparently setting this explicitly cannot be done on windows as it breaks the job
+" let g:FerretExecutable='ag'
+
+
+"#########################
+"#        Coc            #
+"#########################
 set hidden
 
-" Tagbar
+"#########################
+"#       Tagbar          #
+"#########################
 let g:tagbar_left=1
 
-" TagmaTasks
+"#########################
+"#     TagmaTasks        #
+"#########################
 let g:TagmaTasksMarks = 0
 let g:TagmaTasksTokens = ['FIXME', 'TODO', 'NOTE', 'XXX', 'COMBAK']
 let g:TagmaTasksAutoUpdate = 0
 
 
-" Coc extensions
+"#########################
+"#     Coc extensions    #
+"#########################
 call coc#add_extension(
       \'coc-json',
       \'coc-tsserver',
@@ -191,7 +203,9 @@ function! s:show_documentation()
 endfunction
 "}}}
 
+"#########################
 " dos2unix ^M
+"#########################
 fun! Dos2unixFunction()
     let _s=@/
     let l = line(".")
@@ -208,7 +222,9 @@ fun! Dos2unixFunction()
 endfun
 
 
-" Centered floating window {{{
+"#########################
+" Centered floating window
+"#########################
 " Creates a floating window with a most recent buffer to be used
 function! CreateCenteredFloatingWindow()
     let width = float2nr(&columns * 0.6)
@@ -281,7 +297,6 @@ function! ToggleTerm(cmd)
         call DeleteUnlistedBuffers()
     endif
 endfunction
-" }}}
 
 
 " Views {{{

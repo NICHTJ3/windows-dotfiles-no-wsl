@@ -425,7 +425,8 @@ nnoremap <C-n> :NERDTreeTabsToggle<CR>:doau FocusGained<CR>
 " Open FZF with ctrl-p
 nnoremap <C-p> :FZF<cr>
 
-
+" Ack for last search
+nnoremap <leader>ls :Ack/<c-r>/<CR>
 
 " Y yanks to end of line like it should
 nnoremap Y y$

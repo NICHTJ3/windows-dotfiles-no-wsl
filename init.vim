@@ -53,7 +53,8 @@ set ai et sw=2 ts=2 sts=2
 " Misc
 set mouse=a
 set spellfile=~/spell/en.utf-8.add
-noswapfile
+set nobackup
+set noswapfile
 
 " UI
 set background=dark

@@ -14,6 +14,7 @@ call plug#begin()
   Plug 'sheerun/vim-polyglot' " Generic syntax
   Plug 'OrangeT/vim-csharp' " C# and cshtml syntax
   Plug 'chrisbra/csv.vim' " CSV files
+  Plug 'jceb/vim-orgmode'
 
   " Fixes
   Plug 'bfrg/vim-qf' " Fixes issues with built in quick fix menu
@@ -25,19 +26,18 @@ call plug#begin()
   Plug 'tomtom/tcomment_vim' " Toggle comments
   Plug 'pgdouyon/vim-evanesco' " Clears search highlighting on move
 
-  Plug 'JessicaKMcIntosh/TagmaTasks'
-
-  Plug 'scrooloose/nerdtree'
-  Plug 'jistr/vim-nerdtree-tabs'
+  " File finding and navigation
   Plug 'junegunn/fzf'
   Plug 'wincent/ferret'
+  Plug 'majutsushi/tagbar'
+  Plug 'scrooloose/nerdtree'
+  Plug 'jistr/vim-nerdtree-tabs'
+
+  " UI
   Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
-  Plug 'majutsushi/tagbar'
-
-  Plug 'jceb/vim-orgmode'
 call plug#end()
 
 " }}}
@@ -154,13 +154,6 @@ set hidden
 "#       Tagbar          #
 "#########################
 let g:tagbar_left=1
-
-"#########################
-"#     TagmaTasks        #
-"#########################
-let g:TagmaTasksMarks = 0
-let g:TagmaTasksTokens = ['FIXME', 'TODO', 'NOTE', 'XXX', 'COMBAK']
-let g:TagmaTasksAutoUpdate = 0
 
 
 "#########################

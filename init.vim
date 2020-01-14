@@ -476,6 +476,9 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " CocCommands
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 
+" Close all buffers except selected
+nnoremap <leader>o :%bd\|e#<cr>
+
 "Code action leader a
 xmap <leader>a  <Plug>(coc-codeaction-selected)<cr>
 nmap <leader>a  <Plug>(coc-codeaction-selected)<cr>

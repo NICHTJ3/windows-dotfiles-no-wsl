@@ -32,17 +32,25 @@ call plug#begin()
   Plug 'majutsushi/tagbar'
   Plug 'scrooloose/nerdtree'
   Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'airblade/vim-rooter'
 
   " UI
   Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'ryanoasis/vim-devicons'
+
+  Plug 'JessicaKMcIntosh/TagmaTasks'
+
 
 call plug#end()
 
 " }}}
 
 " Settings {{{
+
+set encoding=UTF-8
+
 " Remap leader to space is not working
 let mapleader = " "
 let maplocalleader = " "
@@ -111,14 +119,26 @@ if has("termguicolors")
 endif
 "}}}
 
-" Plugin settings {{{
-" NERDTree
+" Pluggin settings {{{
+
+"#########################
+"#      NERDTree         #
+"#########################
 let NERDTreeWinPos="right"
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let NERDTreeMinimalMenu=1
 
-" FZF
+"#########################
+"#       Rooter          #
+"#########################
+set noautochdir " Don't change dirs automatically, using rooter for that
+let g:rooter_patterns = ['docker-compose.yml', '.git/'] " Use docker files and git
+let g:rooter_silent_chdir = 1 " Change silently
+
+"#########################
+"#         FZF           #
+"#########################
 let $FZF_DEFAULT_COMMAND = 'dir /s/b'
 let g:fzf_colors = {
             \'fg':      ['fg', 'Normal'],
@@ -145,17 +165,15 @@ let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()'}
 " Apparently setting this explicitly cannot be done on windows as it breaks the job
 " let g:FerretExecutable='ag'
 
-
-"#########################
-"#        Coc            #
-"#########################
-set hidden
-
 "#########################
 "#       Tagbar          #
 "#########################
 let g:tagbar_left=1
 
+"#########################
+"#        Coc            #
+"#########################
+set hidden
 
 "#########################
 "#     Coc extensions    #
@@ -367,8 +385,10 @@ endfunction
 augroup MyColors
     autocmd!
     autocmd ColorScheme default call MyHighlights()
+    autocmd ColorScheme default call TODOComments()
 augroup END
-colorscheme base16-onedark
+" colorscheme base16-onedark
+colorscheme default
 
 augroup AutoSource
   autocmd!
@@ -423,9 +443,9 @@ nnoremap <C-Right> :vertical resize +5<CR>
 nnoremap <C-Down> :resize -5<CR>
 nnoremap <C-Up>   :resize +5<CR>
 
-nnoremap <leader>q :q<CR>
-nnoremap <leader>w :w<CR>
-nnoremap <leader>wq :wq<CR>
+" nnoremap <leader>q :q<CR>
+" nnoremap <leader>w :w<CR>
+" nnoremap <leader>wq :wq<CR>
 
 
 " Nerdtree opens with ctrl + n
@@ -513,4 +533,6 @@ command! Notes e ~/notes.org
 command! Breakline :g/^/norm gww
 com! Dos2Unix keepjumps call Dos2unixFunction()
 com! Term call ToggleTerm('powershell')
+com! LazyGit call ToggleTerm('lazygit')
 " }}}
+"

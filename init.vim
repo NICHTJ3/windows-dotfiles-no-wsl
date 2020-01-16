@@ -363,9 +363,10 @@ function! TODOComments() abort
   hi link MyTodo Todo
 endfunction
 
-augroup TODOHighlighting
+augroup FileTypeMiscSettings
   autocmd!
   autocmd FileType * call TODOComments()
+  autocmd FileType org bufdo set wrap
 augroup end
 
 function! MyHighlights() abort

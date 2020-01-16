@@ -42,16 +42,13 @@ call plug#begin()
 
   Plug 'JessicaKMcIntosh/TagmaTasks'
 
-
 call plug#end()
-
 " }}}
 
 " Settings {{{
-
+set confirm
 set encoding=UTF-8
 
-" Remap leader to space is not working
 let mapleader = " "
 let maplocalleader = " "
 
@@ -69,14 +66,6 @@ set background=dark
 set list
 set listchars=tab:>~,nbsp:_,trail:.,extends:>,precedes:<
 set cursorline
-
-" Custom keys as todo
-
-function! SynGroup()
-    let l:s = synID(line('.'), col('.'), 1)
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfun
-
 
 " No wrapping and line numbers
 set nowrap
@@ -213,6 +202,11 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+function! SynGroup()
+    let l:s = synID(line('.'), col('.'), 1)
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
 "}}}
 
 "#########################
@@ -232,7 +226,6 @@ fun! Dos2unixFunction()
     let @/=_s
     call cursor(l, c)
 endfun
-
 
 "#########################
 " Centered floating window
@@ -259,8 +252,10 @@ function! CreateCenteredFloatingWindow()
     let opts.col += 2
     let opts.width -= 4
     call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+
     autocmd BufWipeout <buffer> call CleanupBuffer(s:buf)
-    tnoremap <buffer> <silent> <Esc> <C-\><C-n><CR>:call DeleteUnlistedBuffers()<CR>
+    autocmd BufLeave <buffer> call DeleteUnlistedBuffers()
+
 endfunction
 
 function! CleanupBuffer(buf)
@@ -276,6 +271,7 @@ function! DeleteUnlistedBuffers()
             if name == '[Scratch]' ||
               \ matchend(name, ":bash") ||
               \ matchend(name, ":lazygit") ||
+              \ matchend(name, ":Notes") ||
               \ matchend(name, ":tmuxinator-fzf-start.sh")
                 call CleanupBuffer(n)
             endif
@@ -294,7 +290,6 @@ autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 " Open in vertical split as it is more of a pneumonic
 autocmd! FileType fzf tnoremap <buffer> <c-h> <c-x>
 
-
 function! OnTermExit(job_id, code, event) dict
     if a:code == 0
         call DeleteUnlistedBuffers()
@@ -309,7 +304,6 @@ function! ToggleTerm(cmd)
         call DeleteUnlistedBuffers()
     endif
 endfunction
-
 
 " Views {{{
 let g:skipview_files = [
@@ -363,7 +357,6 @@ augroup Indentation
   autocmd FileType cucumber setlocal sw=2 ts=2 sts=2 noet
 augroup end
 
-
 function! TODOComments() abort
   syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|COMBAK|XXX)/
         \ containedin=.*Comment,vimCommentTitle
@@ -387,8 +380,8 @@ augroup MyColors
     autocmd ColorScheme default call MyHighlights()
     autocmd ColorScheme default call TODOComments()
 augroup END
-" colorscheme base16-onedark
-colorscheme default
+colorscheme base16-onedark
+" colorscheme default
 
 augroup AutoSource
   autocmd!
@@ -404,7 +397,6 @@ imap <silent> <S-Insert> <Esc>"+pa
 " Nav quickfix
 nnoremap <up> :cprev<cr>
 nnoremap <down> :cnext<cr>
-
 
 " Tagbar
 noremap <leader>b :Tagbar<CR>
@@ -423,7 +415,6 @@ nnoremap <leader>H <C-w>H
 nnoremap <leader>L <C-w>L
 nnoremap <leader>J <C-w>J
 nnoremap <leader>K <C-w>K
-
 
 " Scrolling binds
 noremap <m-l> zl
@@ -446,7 +437,6 @@ nnoremap <C-Up>   :resize +5<CR>
 " nnoremap <leader>q :q<CR>
 " nnoremap <leader>w :w<CR>
 " nnoremap <leader>wq :wq<CR>
-
 
 " Nerdtree opens with ctrl + n
 nnoremap <C-n> :NERDTreeTabsToggle<CR>:doau FocusGained<CR>
@@ -522,17 +512,31 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Regen ctags
- map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
-
+nmap <Leader>rt :!ctags --extra=+f -R *<CR><CR>
 nmap <Leader>t :Term<CR>
+
+" Better tab navigation
+nnoremap <C-S-tab> :tabprevious<CR>
+nnoremap <C-tab>   :tabnext<CR>
+nnoremap <C-t>     :tabnew<CR>
+nnoremap <C-w>     :exit<CR>
 "}}}
 
-" Commands {{{
-command! RmTrail %s/\s\+$//e
-command! Notes e ~/notes.org
-command! Breakline :g/^/norm gww
+" Commands and Aliases{{{
+"##########################
+"#       Commands         #
+"##########################
+com! RmTrail %s/\s\+$//e
+com! RmBlankLines g/^$\n^$/j
+com! Notes e ~/notes.org
+com! Breakline g/^/norm gww
 com! Dos2Unix keepjumps call Dos2unixFunction()
 com! Term call ToggleTerm('powershell')
 com! LazyGit call ToggleTerm('lazygit')
+"##########################
+"#        Aliases         #
+"##########################
+cnorea bvsp :aboveleft vsp Left " Split above
+cnorea asp :above split Above " Split left
 " }}}
 "

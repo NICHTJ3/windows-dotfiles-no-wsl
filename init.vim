@@ -27,6 +27,7 @@ call plug#begin()
   Plug 'pgdouyon/vim-evanesco' " Clears search highlighting on move
 
   " File finding and navigation
+  Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'wincent/ferret'
   Plug 'majutsushi/tagbar'
@@ -530,7 +531,7 @@ nnoremap <C-w>     :exit<CR>
 "##########################
 com! RmTrail %s/\s\+$//e
 com! RmBlankLines g/^$\n^$/j
-com! Notes e ~/notes.org
+com! Notes vsp ~/notes.org
 com! Breakline g/^/norm gww
 com! Dos2Unix keepjumps call Dos2unixFunction()
 com! Term call ToggleTerm('powershell')

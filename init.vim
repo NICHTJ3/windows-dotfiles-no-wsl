@@ -27,7 +27,7 @@ call plug#begin()
   Plug 'pgdouyon/vim-evanesco' " Clears search highlighting on move
 
   " File finding and navigation
-  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
   Plug 'wincent/ferret'
   Plug 'majutsushi/tagbar'
   Plug 'scrooloose/nerdtree'
@@ -534,6 +534,7 @@ com! Breakline g/^/norm gww
 com! Dos2Unix keepjumps call Dos2unixFunction()
 com! Term call ToggleTerm('powershell')
 com! LazyGit call ToggleTerm('lazygit')
+com! EditProfile e ~/Documents/WindowsPowerShell/
 "##########################
 "#        Aliases         #
 "##########################

@@ -146,6 +146,7 @@ let g:fzf_colors = {
             \}
 
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()'}
+let g:fzf_command_prefix = 'Fzf'
 
 "#########################
 "#         Ferret        #

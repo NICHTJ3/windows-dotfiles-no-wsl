@@ -28,6 +28,33 @@ $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administ
 #      Clear-Host
 # }
 
+
+# set regular console colors
+[console]::backgroundcolor = "Black"
+[console]::foregroundcolor = "White"
+
+# set special colors
+$p = $host.privatedata
+
+$p.ErrorForegroundColor    = "Red"
+$p.ErrorBackgroundColor    = "Black"
+$p.WarningForegroundColor  = "Yellow"
+$p.WarningBackgroundColor  = "Black"
+$p.DebugForegroundColor    = "Yellow"
+$p.DebugBackgroundColor    = "Black"
+$p.VerboseForegroundColor  = "Yellow"
+$p.VerboseBackgroundColor  = "Black"
+$p.ProgressForegroundColor = "Yellow"
+$p.ProgressBackgroundColor = "DarkCyan"
+
+# Better history searching with up and down arrows
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+# clear screen
+clear-host
+
 # Useful shortcuts for traversing directories
 function cd...  { cd ..\.. }
 function cd.... { cd ..\..\.. }

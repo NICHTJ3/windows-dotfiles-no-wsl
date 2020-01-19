@@ -385,8 +385,8 @@ augroup Indentation
 augroup end
 
 function! TODOComments() abort
-  syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|COMBAK|XXX)/
-        \ containedin=.*Comment,vimCommentTitle
+  syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|COMBAK|XXX)./
+        \ containedin=.*Comment,vimCommentTitle,org_comment
   hi link MyTodo Todo
 endfunction
 
@@ -551,6 +551,7 @@ nnoremap <C-t>     :tabnew<CR>
 " Google with gs
 nmap <silent> gs :set opfunc=GoogleText<CR>g@
 vmap <silent> gs :<C-u>call GoogleText(visualmode(), 1)<Cr>
+
 "}}}
 
 " Commands and Aliases{{{

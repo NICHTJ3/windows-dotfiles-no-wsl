@@ -159,7 +159,7 @@ let g:fzf_command_prefix = 'Fzf'
 "#########################
 "#       Tagbar          #
 "#########################
-let g:tagbar_left=1
+let g:tagbar_left=0
 
 "#########################
 "#        Coc            #
@@ -408,8 +408,9 @@ augroup MyColors
     autocmd ColorScheme default call MyHighlights()
     autocmd ColorScheme default call TODOComments()
 augroup END
-colorscheme base16-onedark
 " colorscheme default
+" colorscheme base16-flat
+" colorscheme base16-atlas " dark version of flat
 
 augroup AutoSource
   autocmd!

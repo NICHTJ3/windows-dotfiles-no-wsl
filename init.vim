@@ -34,6 +34,7 @@ call plug#begin()
   Plug 'scrooloose/nerdtree'
   Plug 'jistr/vim-nerdtree-tabs'
   Plug 'airblade/vim-rooter'
+  Plug 'tpope/vim-vinegar'
 
   " UI
   Plug 'chriskempson/base16-vim'
@@ -410,7 +411,7 @@ augroup MyColors
 augroup END
 " colorscheme default
 " colorscheme base16-flat
-" colorscheme base16-atlas " dark version of flat
+colorscheme base16-atlas " dark version of flat
 
 augroup AutoSource
   autocmd!
@@ -552,6 +553,9 @@ nnoremap <C-t>     :tabnew<CR>
 " Google with gs
 nmap <silent> gs :set opfunc=GoogleText<CR>g@
 vmap <silent> gs :<C-u>call GoogleText(visualmode(), 1)<Cr>
+
+" Open FzfColors with leader cs
+nnoremap <leader>cs :FzfColors<CR>
 
 "}}}
 

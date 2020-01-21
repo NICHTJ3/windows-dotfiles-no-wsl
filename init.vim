@@ -35,12 +35,14 @@ call plug#begin()
   Plug 'jistr/vim-nerdtree-tabs'
   Plug 'airblade/vim-rooter'
   Plug 'tpope/vim-vinegar'
+  Plug 'tpope/vim-projectionist' " Go to alternate file
 
   " UI
   Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'ryanoasis/vim-devicons'
+  Plug 'rafi/awesome-vim-colorschemes'
 
   Plug 'JessicaKMcIntosh/TagmaTasks'
 
@@ -188,6 +190,85 @@ call coc#add_extension(
       \'coc-css',
       \'https://github.com/dsznajder/vscode-es7-javascript-react-snippets'
       \)
+"#########################
+"#     Projectionist     #
+"#########################
+let g:projectionist_heuristics = {
+      \   '*': {
+      \     '*.c': {
+      \       'alternate': '{}.h',
+      \       'type': 'source'
+      \     },
+      \     '*.cpp': {
+      \       'alternate': '{}.h',
+      \       'type': 'source'
+      \     },
+      \     '*.h': {
+      \       'alternate':[
+      \         '{}.c','{}.cpp'
+      \       ],
+      \       'type': 'header'
+      \     },
+      \     '*.js': {
+      \       'alternate': [
+      \         '{dirname}/{basename}.test.js',
+      \         '{dirname}/__tests__/{basename}-test.js',
+      \         '{dirname}/__tests__/{basename}.js',
+      \         '{dirname}/__tests__/{basename}-mocha.js'
+      \       ],
+      \       'type': 'source'
+      \     },
+      \     '*.test.js': {
+      \       'alternate': '{basename}.js',
+      \       'type': 'test',
+      \     },
+      \     '**/__tests__/*-mocha.js': {
+      \       'alternate': '{dirname}/{basename}.js',
+      \       'type': 'test'
+      \     },
+      \     '**/__tests__/*-test.js': {
+      \       'alternate': '{dirname}/{basename}.js',
+      \       'type': 'test'
+      \     },
+      \     '**/__tests__/*.js': {
+      \       'alternate': '{dirname}/{basename}.js',
+      \       'type': 'test'
+      \     },
+      \     '*.re': {
+      \       'alternate': [
+      \         '{}_test.re',
+      \         '{}.rei'
+      \       ],
+      \       'type': 'source'
+      \     },
+      \     '*.rei': {
+      \       'alternate': [
+      \         '{}.re',
+      \         '{}_test.re',
+      \       ],
+      \       'type': 'header'
+      \     },
+      \     '*_test.re': {
+      \       'alternate': [
+      \         '{}.rei',
+      \         '{}.re',
+      \       ],
+      \       'type': 'test'
+      \     },
+      \      '*.py':{
+      \       'alternate': [
+      \           'test_{}.py',
+      \          ],
+      \       'type': 'source'
+      \     },
+      \     'test_*.py':{
+      \       'alternate': [
+      \           '{}.py',
+      \         ],
+      \       'type': 'test'
+      \     }
+      \   }
+      \ }
 
 " }}}
 
@@ -424,6 +505,9 @@ augroup end
 " Mappings {{{
 map <silent> <S-Insert> "+p
 imap <silent> <S-Insert> <Esc>"+pa
+
+" Projectionist meta o swap file
+nnoremap <m-o> :A<CR>
 
 " Nav quickfix
 nnoremap <up> :cprev<cr>

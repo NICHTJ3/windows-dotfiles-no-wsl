@@ -406,12 +406,13 @@ endfunction
 
 augroup MyColors
     autocmd!
-    autocmd ColorScheme default call MyHighlights()
-    autocmd ColorScheme default call TODOComments()
+    autocmd ColorScheme industry,default call MyHighlights()
+    autocmd ColorScheme industry,default call TODOComments()
 augroup END
 " colorscheme default
+colorscheme industry
 " colorscheme base16-flat
-colorscheme base16-atlas " dark version of flat
+" colorscheme base16-atlas " dark version of flat
 
 augroup AutoSource
   autocmd!

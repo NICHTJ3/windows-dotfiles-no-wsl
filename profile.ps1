@@ -65,10 +65,6 @@ function n      { notepad $args }
 function vi      { nvim $args }
 function guivim      { nvim-qt $args }
 
-# Use e to start things
-function e {start $args}
-
-
 # Drive shortcuts
 function HKLM:  { Set-Location HKLM: }
 function HKCU:  { Set-Location HKCU: }
@@ -150,6 +146,9 @@ function admin
 # with elevated rights. 
 Set-Alias -Name su -Value admin
 Set-Alias -Name sudo -Value admin
+
+# Use e to open things
+Set-Alias -Name e -Value start
 
 
 # Make it easy to edit this profile once it's installed

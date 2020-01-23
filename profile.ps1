@@ -150,7 +150,6 @@ Set-Alias -Name sudo -Value admin
 # Use e to open things
 Set-Alias -Name e -Value start
 
-
 # Make it easy to edit this profile once it's installed
 function Edit-Profile
 {

@@ -4,12 +4,16 @@
 
 ### Installation
 
-Install Chocolatey by following directions found [here](https://chocolatey.org/install#individual)
+- Install Chocolatey by following directions found [here](https://chocolatey.org/install#individual)
 
-Using chocolatey using the "Set-ExecutionPolicy Bypass -Scope Process" option and then install neovim and nodejs
+- Using chocolatey using the "Set-ExecutionPolicy Bypass -Scope Process" option and then install neovim and nodejs
 
-Copy init.vim to ~/AppData/Local/nvim/init.vim
+- Copy init.vim to \$env:LOCALAPPDATA\nvim\init.vim
 
-run nvim in powershell
+- run nvim in powershell
 
-run "Unblock-File profile.ps1" and copy it to $profile.CurrentUserAllHosts
+- run "Unblock-File profile.ps1" and copy it to \$profile.CurrentUserAllHosts
+
+- Change background color of powershell in properties to black
+
+- Relaunch powershell

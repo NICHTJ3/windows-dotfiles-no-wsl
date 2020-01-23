@@ -28,7 +28,6 @@ $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administ
 #      Clear-Host
 # }
 
-
 $console = $host.ui.rawui
 $console.backgroundcolor = "black"
 $console.foregroundcolor = "white"
@@ -40,6 +39,9 @@ $colors.warningbackgroundcolor = "Red"
 $colors.warningforegroundcolor = "white"
 $colors.ErrorBackgroundColor = "DarkCyan"
 $colors.ErrorForegroundColor = "Yellow"
+
+# # Use vim keybindings
+Set-PSReadlineOption -EditMode vi
 
 # Better history searching with up and down arrows
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
@@ -63,8 +65,9 @@ function n      { notepad $args }
 function vi      { nvim $args }
 function guivim      { nvim-qt $args }
 
-# Use vim keybindings
-Set-PSReadlineOption -EditMode vi
+# Use e to start things
+function e {start $args}
+
 
 # Drive shortcuts
 function HKLM:  { Set-Location HKLM: }

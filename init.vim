@@ -1,9 +1,9 @@
 " Pluggins {{{
 " Install Vim Plug if not installed and installs plugins on first launch
-if empty(glob('~\AppData\Local\nvim\autoload\plug.vim'))
-  silent !curl -fLo ~\AppData\Local\nvim\autoload\plug.vim  --create-dirs
-     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-   autocmd VimEnter * PlugInstall
+if empty(glob('$LOCALAPPDATA\nvim\autoload\plug.vim'))
+  silent ! powershell (md "$env:LOCALAPPDATA\nvim\autoload")
+  silent ! powershell (New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim', $env:LOCALAPPDATA + '\nvim\autoload\plug.vim')
+  autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin()

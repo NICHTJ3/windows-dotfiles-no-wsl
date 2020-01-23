@@ -4,11 +4,11 @@
 
 ### Installation
 
-- Install Chocolatey by following directions found [here](https://chocolatey.org/install#individual)
+- Install Chocolatey by following directions found [here](https://chocolatey.org/install#individual) using the "Set-ExecutionPolicy Bypass -Scope Process" option
 
-- Using chocolatey using the "Set-ExecutionPolicy Bypass -Scope Process" option and then install neovim and nodejs
+- Using chocolatey install neovim, nodejs and fzf
 
-- Copy init.vim to \$env:LOCALAPPDATA\nvim\init.vim
+- Copy init.vim to $env:LOCALAPPDATA\nvim\init.vim
 
 - run nvim in powershell
 

@@ -29,16 +29,19 @@ $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administ
 # }
 
 $console = $host.ui.rawui
-$console.backgroundcolor = "black"
-$console.foregroundcolor = "white"
+$console.backgroundcolor = "Black"
+$console.foregroundcolor = "White"
 
 $colors = $host.privatedata
 $colors.verbosebackgroundcolor = "Magenta"
 $colors.verboseforegroundcolor = "Green"
 $colors.warningbackgroundcolor = "Red"
-$colors.warningforegroundcolor = "white"
+$colors.warningforegroundcolor = "White"
 $colors.ErrorBackgroundColor = "DarkCyan"
 $colors.ErrorForegroundColor = "Yellow"
+
+# clear screen
+clear-host
 
 # # Use vim keybindings
 Set-PSReadlineOption -EditMode vi
@@ -47,9 +50,6 @@ Set-PSReadlineOption -EditMode vi
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
-
-# clear screen
-clear-host
 
 # Useful shortcuts for traversing directories
 function cd...  { cd ..\.. }

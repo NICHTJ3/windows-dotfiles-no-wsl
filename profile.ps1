@@ -29,23 +29,17 @@ $isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administ
 # }
 
 
-# set regular console colors
-[console]::backgroundcolor = "Black"
-[console]::foregroundcolor = "White"
+$console = $host.ui.rawui
+$console.backgroundcolor = "black"
+$console.foregroundcolor = "white"
 
-# set special colors
-$p = $host.privatedata
-
-$p.ErrorForegroundColor    = "Red"
-$p.ErrorBackgroundColor    = "Black"
-$p.WarningForegroundColor  = "Yellow"
-$p.WarningBackgroundColor  = "Black"
-$p.DebugForegroundColor    = "Yellow"
-$p.DebugBackgroundColor    = "Black"
-$p.VerboseForegroundColor  = "Yellow"
-$p.VerboseBackgroundColor  = "Black"
-$p.ProgressForegroundColor = "Yellow"
-$p.ProgressBackgroundColor = "DarkCyan"
+$colors = $host.privatedata
+$colors.verbosebackgroundcolor = "Magenta"
+$colors.verboseforegroundcolor = "Green"
+$colors.warningbackgroundcolor = "Red"
+$colors.warningforegroundcolor = "white"
+$colors.ErrorBackgroundColor = "DarkCyan"
+$colors.ErrorForegroundColor = "Yellow"
 
 # Better history searching with up and down arrows
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd

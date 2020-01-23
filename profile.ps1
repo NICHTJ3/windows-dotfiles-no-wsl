@@ -69,6 +69,9 @@ function n      { notepad $args }
 function vi      { nvim $args }
 function guivim      { nvim-qt $args }
 
+# Use vim keybindings
+Set-PSReadlineOption -EditMode vi
+
 # Drive shortcuts
 function HKLM:  { Set-Location HKLM: }
 function HKCU:  { Set-Location HKCU: }

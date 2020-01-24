@@ -53,6 +53,12 @@ call plug#end()
 set confirm
 set encoding=UTF-8
 
+" Fix syntax timeout on large files
+set ttyfast
+set lazyredraw
+set regexpengine=1
+set redrawtime=2000
+
 let mapleader = " "
 let maplocalleader = " "
 
@@ -163,6 +169,12 @@ let g:fzf_command_prefix = 'Fzf'
 "#       Tagbar          #
 "#########################
 let g:tagbar_left=0
+
+"#########################
+"#       Markdown        #
+"#########################
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
 
 "#########################
 "#        Coc            #
@@ -657,6 +669,7 @@ com! Dos2Unix keepjumps call Dos2unixFunction()
 com! Term call ToggleTerm('powershell')
 com! LazyGit call ToggleTerm('lazygit')
 com! EditProfile e ~/Documents/WindowsPowerShell/
+com! ForceSyntax syntax sync fromstart
 "##########################
 "#        Aliases         #
 "##########################

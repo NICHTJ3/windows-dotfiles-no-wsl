@@ -47,7 +47,6 @@ call plug#begin()
   Plug 'vim-airline/vim-airline-themes'
   Plug 'ryanoasis/vim-devicons'
   Plug 'rafi/awesome-vim-colorschemes'
-  Plug 'junegunn/goyo.vim'
 
 call plug#end()
 " }}}
@@ -285,13 +284,6 @@ let g:projectionist_heuristics = {
       \     }
       \   }
       \ }
-
-"#########################
-"#         Goyo          #
-"#########################
-let g:goyo_width=100
-let g:goyo_height='90%'
-let g:goyo_linenr=0
 
 " }}}
 

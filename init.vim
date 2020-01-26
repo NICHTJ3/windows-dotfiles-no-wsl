@@ -157,8 +157,14 @@ let g:fzf_colors = {
             \ 'header':  ['fg', 'Comment']
             \}
 
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()'}
 let g:fzf_command_prefix = 'Fzf'
+" Close fzf with escape
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 
 "#########################
@@ -408,11 +414,6 @@ autocmd TermOpen * startinsert
 
 " Turn off line numbers etc
 autocmd TermOpen * setlocal listchars= nonumber norelativenumber
-
-" Close fzf with escape
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
-" Open in vertical split as it is more of a pneumonic
-autocmd! FileType fzf tnoremap <buffer> <c-h> <c-x>
 
 function! OnTermExit(job_id, code, event) dict
     if a:code == 0

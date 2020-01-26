@@ -25,8 +25,9 @@ call plug#begin()
   Plug 'tpope/vim-surround' " Change/Add surrounding character
   Plug 'tomtom/tcomment_vim' " Toggle comments
   Plug 'pgdouyon/vim-evanesco' " Clears search highlighting on move
+  Plug 'JessicaKMcIntosh/TagmaTasks'
 
-  " File finding and navigation
+  " File finding
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'wincent/ferret'
@@ -35,6 +36,9 @@ call plug#begin()
   Plug 'jistr/vim-nerdtree-tabs'
   Plug 'airblade/vim-rooter'
   Plug 'tpope/vim-vinegar'
+
+  " Navigation
+  Plug 'psliwka/vim-smoothie'
   Plug 'tpope/vim-projectionist' " Go to alternate file
 
   " UI
@@ -43,8 +47,7 @@ call plug#begin()
   Plug 'vim-airline/vim-airline-themes'
   Plug 'ryanoasis/vim-devicons'
   Plug 'rafi/awesome-vim-colorschemes'
-
-  Plug 'JessicaKMcIntosh/TagmaTasks'
+  Plug 'junegunn/goyo.vim'
 
 call plug#end()
 " }}}
@@ -157,6 +160,7 @@ let g:fzf_colors = {
 
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()'}
 let g:fzf_command_prefix = 'Fzf'
+
 
 "#########################
 "#         Ferret        #
@@ -281,6 +285,13 @@ let g:projectionist_heuristics = {
       \     }
       \   }
       \ }
+
+"#########################
+"#         Goyo          #
+"#########################
+let g:goyo_width=100
+let g:goyo_height='90%'
+let g:goyo_linenr=0
 
 " }}}
 
@@ -653,7 +664,6 @@ vmap <silent> gs :<C-u>call GoogleText(visualmode(), 1)<Cr>
 
 " Open FzfColors with leader cs
 nnoremap <leader>cs :FzfColors<CR>
-
 "}}}
 
 " Commands and Aliases{{{

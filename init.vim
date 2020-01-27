@@ -26,6 +26,7 @@ call plug#begin()
   Plug 'tomtom/tcomment_vim' " Toggle comments
   Plug 'pgdouyon/vim-evanesco' " Clears search highlighting on move
   Plug 'JessicaKMcIntosh/TagmaTasks'
+  Plug 'dhruvasagar/vim-table-mode'
 
   " File finding
   Plug 'junegunn/fzf'
@@ -61,29 +62,42 @@ set lazyredraw
 set regexpengine=1
 set redrawtime=2000
 
+"#########################
+"#       Leader          #
+"#########################
 let mapleader = " "
 let maplocalleader = " "
 
-" Indentation
+"#########################
+"#     Indentation       #
+"#########################
 set ai et sw=2 ts=2 sts=2
 
-" Misc
+"#########################
+"#        Misc           #
+"#########################
 set mouse=a
 set spellfile=~/spell/en.utf-8.add
 set nobackup
 set noswapfile
 
-" UI
+"#########################
+"#         UI            #
+"#########################
 set background=dark
 set list
 set listchars=tab:>~,nbsp:_,trail:.,extends:>,precedes:<
 set cursorline
 
-" No wrapping and line numbers
+"################################
+"# No wrapping and line numbers #
+"################################
 set nowrap
 set number
 
-" Sane window splitting
+"#########################
+"# Sane window splitting #
+"#########################
 set splitbelow
 set splitright
 

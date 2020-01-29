@@ -9,11 +9,14 @@ endif
 call plug#begin()
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+  Plug 'xolox/vim-misc' " Required by vim-easytags
+
   " Snippets and syntax
   Plug 'honza/vim-snippets' " Generic snippets
   Plug 'sheerun/vim-polyglot' " Generic syntax
-  Plug 'OrangeT/vim-csharp' " C# and cshtml syntax
   Plug 'chrisbra/csv.vim' " CSV files
+  Plug 'OrangeT/vim-csharp' " C# and cshtml syntax
+  Plug 'xolox/vim-easytags' " Highlight ctags
   Plug 'jceb/vim-orgmode'
 
   " Fixes
@@ -43,11 +46,16 @@ call plug#begin()
   Plug 'tpope/vim-projectionist' " Go to alternate file
 
   " UI
-  Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
   Plug 'ryanoasis/vim-devicons'
+
+  " Colorschemes
   Plug 'rafi/awesome-vim-colorschemes'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'chriskempson/base16-vim'
+  Plug 'jacoborus/tender.vim'
+  Plug 'kyoz/purify', { 'rtp': 'vim' }
+  Plug 'sjl/badwolf'
 
 call plug#end()
 " }}}
@@ -65,8 +73,8 @@ set redrawtime=2000
 "#########################
 "#       Leader          #
 "#########################
-let mapleader = " "
-let maplocalleader = " "
+let mapleader=" "
+let maplocalleader=" "
 
 "#########################
 "#     Indentation       #
@@ -132,6 +140,7 @@ if has("termguicolors")
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "}}}
 
 " Pluggin settings {{{
@@ -143,6 +152,13 @@ let NERDTreeWinPos="right"
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 let NERDTreeMinimalMenu=1
+
+
+"#########################
+"#      EasyTags         #
+"#########################
+let g:easytags_auto_update = 1
+let g:easytags_include_members = 1
 
 "#########################
 "#       Rooter          #
@@ -521,9 +537,21 @@ augroup MyColors
     autocmd ColorScheme industry,default call TODOComments()
 augroup END
 " colorscheme default
-colorscheme industry
+"
+" colorscheme industry
+"
+colorscheme tender
+let g:airline_theme = 'tender'
+"
 " colorscheme base16-flat
+"
 " colorscheme base16-atlas " dark version of flat
+"
+colorscheme purify
+let g:airline_theme = 'purify'
+"
+" colorscheme badwolf
+" let g:airline_theme = 'badwolf'
 
 augroup AutoSource
   autocmd!
@@ -657,7 +685,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Regen ctags
-nmap <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+nmap <Leader>rt :!ctags --extra=+f+q -R *<CR><CR>
 nmap <Leader>t :Term<CR>
 
 " Better tab navigation

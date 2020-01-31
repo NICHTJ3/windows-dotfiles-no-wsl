@@ -157,7 +157,8 @@ let NERDTreeMinimalMenu=1
 "#########################
 "#      EasyTags         #
 "#########################
-let g:easytags_auto_update = 1
+let g:easytags_auto_update = 0
+let g:easytags_auto_highlight = 1
 let g:easytags_include_members = 1
 
 "#########################
@@ -685,7 +686,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Regen ctags
-nmap <Leader>rt :!ctags --extra=+f+q -R *<CR><CR>
+nmap <Leader>rt :!ctags  --fields=+l --extra=+f+q -R *<CR><CR>
 nmap <Leader>t :Term<CR>
 
 " Better tab navigation
